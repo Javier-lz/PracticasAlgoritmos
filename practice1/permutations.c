@@ -11,9 +11,7 @@
 
 
 #include "permutations.h"
-#ifndef stlib
-
-
+#include<stdlib.h>
 /***************************************************/
 /* Function: random_num Date:                      */
 /* Authors:                                        */
@@ -29,10 +27,9 @@
 /***************************************************/
 int random_num(int inf, int sup)
 {
-  if (inf<0 || sup > RAND_MAX || sup > __INT_MAX__){
-    return ERR; 
-  }
-  return inf+rand(); 
+  if(inf<0 || sup >RAND_MAX)
+    return ERR;
+  return (rand()/(RAND_MAX+1.))*(sup-inf+1)+inf;
 
 
   /* your code */
@@ -53,7 +50,25 @@ int random_num(int inf, int sup)
 /***************************************************/
 int* generate_perm(int N)
 {
-  /* your code */
+     int i, rand, dum;
+  int* perm=NULL;
+  if(N<0)
+    return NULL;
+  perm=malloc(N*sizeof(int));
+  if(!perm)
+    return NULL;
+  for ( i = 0; i < N; i++)
+  {
+  perm[i]=i+1;
+  }
+  for ( i = 0; i < N; i++)
+  {
+  rand = random_num(i, N-1);
+  dum= perm[rand];
+  perm[rand] = perm[i];
+  perm[i] = dum;
+  }
+  return perm;
 }
 
 /***************************************************/
@@ -73,5 +88,17 @@ int* generate_perm(int N)
 /***************************************************/
 int** generate_permutations(int n_perms, int N)
 {
-/* your code */
+  int** perms = malloc(sizeof(int*)*n_perms); 
+  int i = 0; 
+  for ( i = 0; i<n_perms;i++){
+    perms[i]=generate_perm(N); 
+    if (perms[i]==NULL){
+      int j=0; 
+      for  (j=0; j<i;j++){
+        free(perms[j]); 
+      }
+    }
+  }
+  return perms; 
+
 }
