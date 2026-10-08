@@ -39,7 +39,12 @@ short average_sorting_time(pfunc_sort metodo,
   for (int j = 0; j<n_perms;j++){
     ret= metodo(perms[j],0,N-1); 
     //gestionar memorya y errores 
-    
+    if (ret < min_op){
+      min_op=ret; 
+    }
+    if(ret>max_op){
+      max_op=ret; 
+    }
     //comprobar max min
 
     average_ob+=(double)ret/n_perms; 
@@ -49,10 +54,21 @@ short average_sorting_time(pfunc_sort metodo,
   fin= clock(); 
   //comprobar
 
-
-
+  ptime->average_ob=average_ob; 
+  ptime->max_ob=max_op; 
+  ptime->min_ob=min_op; 
+  ptime->N=N; 
+  ptime->n_elems=n_perms; 
+  ptime->time=((fin-ini)/(float)n_perms)/CLOCK_PER_SEC;
+   
   // Añadir a la estructura 
-  
+  // para time divicir por CLOCKS_PER_SEC 
+
+
+  // liberar memoria 
+
+
+
 /* Your code */
 }
 
