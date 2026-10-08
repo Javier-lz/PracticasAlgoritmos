@@ -11,6 +11,7 @@
 
 #include "times.h"
 #include "sorting.h"
+#include <stdlib.h>
 
 /***************************************************/
 /* Function: average_sorting_time Date:            */
@@ -81,6 +82,22 @@ short generate_sorting_times(pfunc_sort method, char* file,
                                 int num_min, int num_max, 
                                 int incr, int n_perms)
 {
+  int num= (num_max-num_min)/incr+1; 
+  PTIME_AA*times = malloc(sizeof(PTIME_AA)*num); 
+  if (times == NULL){
+    return ERR; 
+  }
+
+
+  for (int j=0; j<num;j++){
+    average_sorting_time(method,n_perms,num_min+j*incr,&times[j]);
+    //gestion errores + memoria 
+    if (times[j]==NULL){
+      free(times); 
+      return ERR; 
+    }
+  }
+  return OK; 
   /* Your code */
 }
 
@@ -91,6 +108,16 @@ short generate_sorting_times(pfunc_sort method, char* file,
 /***************************************************/
 short save_time_table(char* file, PTIME_AA ptime, int n_times)
 {
+
+  FILE* fp; 
+  fp=fopen(file,"W"); 
+  //control de errores 
+  int j ; 
+  for (j=0; j<n_times;j++){
+    fprintf(fp,"%d %d %lf %d %d %d\n", ptime[j].N,ptime[j].n_elems,ptime[j].time,ptime[j].average_ob,ptime[j].min_ob,ptime[j].max_ob);
+    
+  }
+
   /* your code */
 }
 
