@@ -22,6 +22,37 @@ short average_sorting_time(pfunc_sort metodo,
                               int N, 
                               PTIME_AA ptime)
 {
+  int ** perms; 
+  double time; 
+  double average_ob; 
+  int min_op; 
+  int max_op; 
+
+  clock_t ini; 
+  clock_t fin; 
+  int ret; 
+  ini=clock(); 
+  //comprobar errores y memoria 
+
+  perms=generate_permutations(n_perms,N); 
+
+  for (int j = 0; j<n_perms;j++){
+    ret= metodo(perms[j],0,N-1); 
+    //gestionar memorya y errores 
+    
+    //comprobar max min
+
+    average_ob+=(double)ret/n_perms; 
+
+  }
+
+  fin= clock(); 
+  //comprobar
+
+
+
+  // Añadir a la estructura 
+  
 /* Your code */
 }
 
