@@ -1,64 +1,63 @@
 
+
 /**
- * Description: Implementation of functions that generate permutations
+ *
+ * Descripcion: Implementation of function that generate permutations
  *
  * File: permutations.c
+ * Autor: Carlos Aguirre
+ * Version: 1.1
+ * Fecha: 21-09-2019
+ *
  */
 
 #include "permutations.h"
 #include <stdlib.h>
-#include <stddef.h>
 
-/**
- * Generates a random integer between inf and sup, both included.
- * Returns ERR if the arguments are invalid.
- */
+/********************************************/
+/* Function: random_num Date:               */
+/* Authors:                                 */
+/*                                           */
+/* Rutine that generates a random number    */
+/* between two given numbers                */
+/*                                           */
+/* Input:                                   */
+/* int inf: lower limit                     */
+/* int sup: upper limit                     */
+/* Output:                                  */
+/* int: random number                       */
+/********************************************/
 int random_num(int inf, int sup)
 {
-    unsigned long long interval;
-    unsigned long long total;
-    unsigned long long limit;
-    unsigned long long r;
-
-    if (inf < 0 || sup < inf)
+    if (inf < 0 || sup > RAND_MAX)
         return ERR;
 
-    total = (unsigned long long)RAND_MAX + 1ULL;
-    interval = (unsigned long long)sup -
-               (unsigned long long)inf + 1ULL;
-
-    if (interval > total)
-        return ERR;
-
-    limit = total - (total % interval);
-
-    do {
-        r = (unsigned long long)rand();
-    } while (r >= limit);
-
-    return inf + (int)(r % interval);
+    return (rand() / (RAND_MAX + 1.)) * (sup - inf + 1) + inf;
 }
 
-/**
- * Generates a random permutation of N elements.
- * Returns NULL in case of error.
- */
+/********************************************/
+/* Function: generate_perm                  */
+/* Authors:                                 */
+/*                                           */
+/* Rutine that generates a random permutation */
+/*                                           */
+/* Input:                                   */
+/* int n: number of elements in the permutation */
+/* Output:                                  */
+/* int *: pointer to integer array          */
+/* that contains the permutation            */
+/* or NULL in case of error                 */
+/********************************************/
 int *generate_perm(int N)
 {
-    int *perm;
-    int i;
-    int rand_index;
-    int temp;
+    int i, rand, dum;
+    int *perm = NULL;
 
-    if (N <= 0)
+    if (N < 0)
         return NULL;
 
-    if ((size_t)N > (size_t)-1 / sizeof(int))
-        return NULL;
-
-    perm = malloc((size_t)N * sizeof(int));
-
-    if (perm == NULL)
+    perm = malloc(N * sizeof(int));
+    if (!perm)
         return NULL;
 
     for (i = 0; i < N; i++) {
@@ -66,38 +65,42 @@ int *generate_perm(int N)
     }
 
     for (i = 0; i < N; i++) {
-        rand_index = random_num(i, N - 1);
-
-        if (rand_index == ERR) {
-            free(perm);
-            return NULL;
+        rand = random_num(i, N - 1);
+        if (rand == ERR)
+        {
+          free(perm);
+          return ERR;
         }
-
-        temp = perm[i];
-        perm[i] = perm[rand_index];
-        perm[rand_index] = temp;
+        
+        dum = perm[rand];
+        perm[rand] = perm[i];
+        perm[i] = dum;
     }
 
     return perm;
 }
 
-/**
- * Generates n_perms random permutations of N elements.
- * Returns NULL in case of error.
- */
+/********************************************/
+/* Function: generate_permutations          */
+/*                                           */
+/* Function that generates n_perms random   */
+/* permutations with N elements each        */
+/*                                           */
+/* Input:                                   */
+/* int n_perms: Number of permutations      */
+/* int N: Number of elements in each permutation */
+/* Output:                                  */
+/* int **: Array of pointers to integer     */
+/* that point to each of the permutations   */
+/* NULL in case of error                    */
+/********************************************/
 int **generate_permutations(int n_perms, int N)
 {
-    int **perms;
-    int i;
-    int j;
+    int **perms = malloc(sizeof(int *) * n_perms);
+    int i = 0, j=0;
 
     if (n_perms <= 0 || N <= 0)
         return NULL;
-
-    if ((size_t)n_perms > (size_t)-1 / sizeof(int *))
-        return NULL;
-
-    perms = malloc((size_t)n_perms * sizeof(int *));
 
     if (perms == NULL)
         return NULL;
@@ -110,12 +113,11 @@ int **generate_permutations(int n_perms, int N)
         perms[i] = generate_perm(N);
 
         if (perms[i] == NULL) {
-            for (j = 0; j < i; j++) {
-                free(perms[j]);
-            }
-
-            free(perms);
-            return NULL;
+          for (j = 0; j < i; j++) {
+              free(perms[j]);
+          }
+          free(perms);
+          return NULL;
         }
     }
 
