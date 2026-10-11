@@ -53,7 +53,7 @@ int *generate_perm(int N)
     int i, rand, dum;
     int *perm = NULL;
 
-    if (N < 0)
+    if (N <= 0)
         return NULL;
 
     perm = malloc(N * sizeof(int));
@@ -69,7 +69,7 @@ int *generate_perm(int N)
         if (rand == ERR)
         {
           free(perm);
-          return ERR;
+          return NULL;
         }
         
         dum = perm[rand];
@@ -96,12 +96,13 @@ int *generate_perm(int N)
 /********************************************/
 int **generate_permutations(int n_perms, int N)
 {
-    int **perms = malloc(sizeof(int *) * n_perms);
+    int **perms;
     int i = 0, j=0;
 
     if (n_perms <= 0 || N <= 0)
         return NULL;
 
+    perms = malloc(sizeof(int *) * n_perms);
     if (perms == NULL)
         return NULL;
 
