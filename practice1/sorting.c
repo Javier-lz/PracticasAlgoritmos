@@ -50,5 +50,35 @@ int InsertSort(int *array, int ip, int iu)
 /********************************************/
 int BubbleSort(int *array, int ip, int iu)
 {
-    /* Your code */
+    int i, j, aux;
+    int count = 0;
+    int intercambio;
+
+    if (array == NULL || ip < 0 || iu < ip)
+        return ERR;
+
+    i = iu;
+
+    while (i > ip) {
+        intercambio = 0;
+
+        for (j = ip; j < i; j++) {
+            count++;
+
+            if (array[j] > array[j + 1]) {
+                aux = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = aux;
+
+                intercambio = 1;
+            }
+        }
+
+        if (intercambio == 0)
+            break;
+
+        i--;
+    }
+
+    return count;
 }
