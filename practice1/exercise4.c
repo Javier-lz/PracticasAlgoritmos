@@ -49,10 +49,10 @@ int main(int argc, char** argv)
     exit(-1);
   }
 
-  ret =BubbleSort(perm, 0, tamano-1);
+  ret = InsertSort(perm, 0, tamano-1);
 
   if (ret == ERR) {
-    printf("Error: Error in BubbleSort\n");
+    printf("Error: Error in InsertSort\n");
     free(perm);
     exit(-1);
   }

@@ -29,7 +29,7 @@
 /********************************************/
 int random_num(int inf, int sup)
 {
-    if (inf < 0 || sup > RAND_MAX)
+    if (inf < 0 || sup > RAND_MAX || inf > sup)
         return ERR;
 
     return (rand() / (RAND_MAX + 1.)) * (sup - inf + 1) + inf;

@@ -11,6 +11,8 @@
 
 #include "times.h"
 #include "sorting.h"
+#include "permutations.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
@@ -134,7 +136,7 @@ short generate_sorting_times(pfunc_sort method, char* file, int num_min, int num
     }
   }
 
-  if (savetimetable(file, times, num) == ERR) {
+  if (save_time_table(file, times, num) == ERR) {
         free(times);
         return ERR;
   }
@@ -157,13 +159,13 @@ short save_time_table(char* file, PTIME_AA ptime, int n_times)
   if (file == NULL || ptime == NULL || n_times <= 0) 
     return ERR;
 
-  fp=fopen(file,"W"); 
+  fp=fopen(file,"w"); 
   if (!fp)
     return ERR;
   
  
   for (j=0; j<n_times;j++){
-    if(fprintf(fp,"%d %d %lf %d %d %d\n", ptime[j].N,ptime[j].n_elems,ptime[j].time,ptime[j].average_ob,ptime[j].min_ob,ptime[j].max_ob)<0){
+    if(fprintf(fp,"%d %d %f %f %d %d\n", ptime[j].N,ptime[j].n_elems,ptime[j].time,ptime[j].average_ob,ptime[j].min_ob,ptime[j].max_ob)<0){
       fclose(fp);
       return ERR;
     }
