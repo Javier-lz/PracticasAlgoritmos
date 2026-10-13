@@ -47,17 +47,17 @@ exercise1_test:
 
 exercise2_test:
 	@echo Running exercise2
-	@./exercise2 -size 1 -numP 5
+	@./exercise2 -size 10 -numP 100
 
 exercise3_test:
 	@echo Running exercise3
-	@./exercise3 -size 1 -numP 5
+	@./exercise3 -size 10 -numP 50
 
 exercise4_test:
 	@echo Running exercise4
-	@./exercise4 -size 1
+	@./exercise4 -size 100
 
 exercise5_test:
 	@echo Running exercise5
-	@./exercise5 -num_min 1 -num_max 5 -incr 1 -numP 5 -outputFile exercise5.log
+	@./exercise5 -num_min 3 -num_max 50 -incr 1 -numP 500 -outputFile exercise5.log
 
