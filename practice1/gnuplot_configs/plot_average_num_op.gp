@@ -5,6 +5,6 @@ set ylabel "Numero de operaciones"
 
 set grid
 set terminal pngcairo
-set output "./graficas/average_time.png"
+set output output_file
 
-plot "./exercise5.log" using 1:5 title "NumOp" with lines
+plot input_file using 1:5 title sprintf("AvNumOp(%s)", algorithm) with lines
