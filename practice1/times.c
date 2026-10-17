@@ -16,7 +16,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
-
 /***************************************************/
 /* Function: average_sorting_time Date:            */
 /*                                                 */
