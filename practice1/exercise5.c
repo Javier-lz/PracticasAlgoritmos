@@ -28,7 +28,7 @@ int main(int argc, char** argv)
   int i, num_min, num_max, incr, n_perms;
   char nombre[256];
   char nombre_bubble[256]; 
-  char nombre_insert[256]; 
+  char nombre_merge[256]; 
   short ret;
 
   srand(time(NULL));
@@ -68,22 +68,22 @@ int main(int argc, char** argv)
   }
 
   /* compute times */
-  if (snprintf(nombre_insert, sizeof(nombre_insert), "%s.insert", nombre) >= sizeof(nombre_insert) ||
+  if (snprintf(nombre_merge, sizeof(nombre_merge), "%s.merge", nombre) >= sizeof(nombre_merge) ||
     snprintf(nombre_bubble, sizeof(nombre_bubble), "%s.bubble", nombre) >= sizeof(nombre_bubble)) {
     fprintf(stderr, "Filename too long or formatting error\n");
     exit(-1);
 }
-  ret = generate_sorting_times(InsertSort, nombre_insert, num_min, num_max, incr, n_perms);
+  ret = generate_sorting_times(MergeSort, nombre_merge, num_min, num_max, incr, n_perms);
   if (ret == ERR) { /* ERR_TIME should be a negative number */
     printf("Error in function generate_sorting_times\n");
     exit(-1);
   }
   
-    ret = generate_sorting_times(BubbleSort, nombre_bubble, num_min, num_max, incr, n_perms);
-  if (ret == ERR) { /* ERR_TIME should be a negative number */
-    printf("Error in function generate_sorting_times\n");
-    exit(-1);
-  }
+  //   ret = generate_sorting_times(BubbleSort, nombre_bubble, num_min, num_max, incr, n_perms);
+  // if (ret == ERR) { /* ERR_TIME should be a negative number */
+  //   printf("Error in function generate_sorting_times\n");
+  //   exit(-1);
+  // }
   printf("Correct output \n");
 
   return 0;
