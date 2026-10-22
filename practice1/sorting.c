@@ -118,7 +118,7 @@ if(! tabla_aux){
 }
 i=ip; 
 j=im+1;
-while (i<im &&  j<iu){
+while (i<=im &&  j<=iu){
     if(array[i]<array[j]){
         tabla_aux[k]=array[i]; 
         i++;
@@ -131,22 +131,22 @@ while (i<im &&  j<iu){
 
 }
 
-if (i>=im){
-    while ( j<iu){
+if (i>im){
+    while ( j<=iu){
         tabla_aux[k]=array[j]; 
         j++;
         k++;
     }
 }
-else if ( j>=iu){
-    while (i<im){
+else if ( j>iu){
+    while (i<=im){
         tabla_aux[k]=array[i]; 
         i++;
         k++;
     }
 }
 j=0; 
-for (j=0; j<(ip-iu+1);j++){
+for (j=0; j<(iu-ip+1);j++){
     array[ip+j]=tabla_aux[j]; 
 }
 free(tabla_aux); 
