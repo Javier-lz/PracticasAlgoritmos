@@ -21,6 +21,7 @@
 
 /* type definitions */
 typedef int (* pfunc_sort)(int*, int, int);
+typedef int (*pfunc_pivot)(int*, int, int, int*);
 
 /* Functions */
 

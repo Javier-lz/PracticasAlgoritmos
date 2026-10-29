@@ -167,18 +167,23 @@ return count;
 
 
 int QuickSort_mean( int* array, int ip, int iu){
-int pos; 
-pos = ip + (iu-ip)/2; 
-if ( iu < ip ){
-    return ERR; 
+    int pos; 
+    pos = ip + (iu-ip)/2; 
+    if ( iu < ip ){
+        return ERR; 
+    }
+}
+
+int QuickSort_min(int* array, int ip, int iu){
+
+
 }
 
 
-
-}
 int partir(int * array, int ip, int iu){
     
 }
+
 int pivot_mean(int*array, int ip, int iu, int * pos){
 
 }
