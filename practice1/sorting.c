@@ -176,14 +176,14 @@ int QuickSort_mean( int* array, int ip, int iu){
     if ( iu < ip ){
         return ERR; 
     }
-    count=partition(array, ip, iu,&pos, ); 
+    
     
 }
 
 int QuickSort_min(int* array, int ip, int iu){
     int m; 
     int count; 
-
+    
     if( !array){
         return ERR; 
     }
@@ -194,19 +194,19 @@ int QuickSort_min(int* array, int ip, int iu){
         return OK; 
     }
     else{
-    count=partition(array, ip, iu,&m, pivot_min); 
-    if (ip<m-1){
-        QuickSort_min(array,ip,m-1); 
+        count=partition(array, ip, iu,&m, pivot_min); 
+        if (ip<m-1){
+            QuickSort_min(array,ip,m-1); 
+        }
+        if(m+1<iu){
+            QuickSort_min(array,m+1, iu );
+        }
+        
     }
-    if(m+1<iu){
-        QuickSort_min(array,m+1, iu );
-    }
-
-}
-
+    
     return count; 
-
-
+    
+    
 }
 
 
@@ -216,15 +216,16 @@ int partition(int * array, int ip, int iu,int*pos, pfunc_pivot pivot){
     int k; 
     int temp_swap; 
     int i; 
-
+    
     count+=pivot(array, ip ,iu, &m); 
+    k=array[m]; 
     temp_swap=array[ip]; 
     array[ip]= array[m]; 
     array[m]= temp_swap; 
-
+    
     m=ip; 
-
-    for (i=ip+1; i<iu; i++){
+    
+    for (i=ip+1; i<=iu; i++){
         count++; 
         if (array[i]<k){
             m++; 
@@ -238,19 +239,20 @@ int partition(int * array, int ip, int iu,int*pos, pfunc_pivot pivot){
     array[m]= temp_swap; 
     *pos=m; 
     return count; 
-
-
+    
+    
     
 }
 
 int pivot_min(int*array, int ip, int iu, int * pos){
-    *pos= array[ip]; 
+    *pos= ip; 
     return 0; 
 }
 int pivot_mean(int*array, int ip, int iu, int * pos){
-    
+    *pos = ip +(iu-ip)/2; 
+    return 0; 
 }
 int pivot_median(int*array, int ip, int iu, int * pos){
-    *pos= array[ip]; 
-    return 0; 
+
+ 
 }

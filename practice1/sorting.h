@@ -29,6 +29,9 @@ int BubbleSort(int* array, int ip, int iu);
 int InsertSort(int* array, int ip, int iu);
 int MergeSort(int*array,int ip, int iu); 
 int merge(int*array,int ip, int iu, int im); 
-
-
+int QuickSort_min(int*array, int ip, int iu); 
+int pivot_min(int*array, int ip, int iu, int * pos); 
+int pivot_mean(int*array, int ip, int iu, int * pos);
+int pivot_median(int*array, int ip, int iu, int * pos);
+int partition(int * array, int ip, int iu,int*pos, pfunc_pivot pivot);
 #endif
