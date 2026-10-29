@@ -87,22 +87,32 @@ int BubbleSort(int *array, int ip, int iu)
 
 int MergeSort(int * array, int ip, int iu){
     int m; 
-
+   
+    int count_left=0; 
+    int count_right=0; 
+    int count_merge=0;
     if ( ip > iu || !array || ip <0 ){
         return ERR; 
     }
     if (ip==iu){
         return OK; 
     }
-    m = (ip+iu)/2; 
-    if(MergeSort(array,ip,m)==-1){
+    m = (ip+iu-1)/2; 
+    
+    count_left=MergeSort(array,ip,m);
+    if(count_left==-1){
         return ERR; 
     }
-    if(MergeSort(array,m+1,iu)==-1){
+    count_right=MergeSort(array,m+1,iu);
+    if(count_right==-1){
         return ERR; 
     }
 
-    return merge(array,ip,iu,m);
+    count_merge= merge(array,ip,iu,m);
+    if(count_merge==-1){
+        return ERR; 
+    }
+    return count_merge+count_left+count_right; 
 
 
 }
@@ -111,7 +121,7 @@ int MergeSort(int * array, int ip, int iu){
 int merge(int* array , int ip, int iu, int im){
 int i=0,j=0,k=0; 
 int* tabla_aux;
-
+int count=0; 
 tabla_aux= malloc(sizeof(int)*(iu-ip+1));
 if(! tabla_aux){
     return ERR; 
@@ -119,6 +129,7 @@ if(! tabla_aux){
 i=ip; 
 j=im+1;
 while (i<=im &&  j<=iu){
+    count++;
     if(array[i]<array[j]){
         tabla_aux[k]=array[i]; 
         i++;
@@ -151,5 +162,23 @@ for (j=0; j<(iu-ip+1);j++){
 }
 free(tabla_aux); 
 
-return OK; 
+return count; 
+}
+
+
+int QuickSort_mean( int* array, int ip, int iu){
+int pos; 
+pos = ip + (iu-ip)/2; 
+if ( iu < ip ){
+    return ERR; 
+}
+
+
+
+}
+int partir(int * array, int ip, int iu){
+    
+}
+int pivot_mean(int*array, int ip, int iu, int * pos){
+
 }
