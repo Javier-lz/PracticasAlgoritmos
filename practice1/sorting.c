@@ -167,19 +167,62 @@ return count;
 
 
 int QuickSort_mean( int* array, int ip, int iu){
-    int pos; 
+    int m; 
     int count; 
-
+    
     if( !array){
         return ERR; 
     }
     if ( iu < ip ){
         return ERR; 
     }
+    if ( iu == ip){
+        return OK; 
+    }
+    else{
+        count=partition(array, ip, iu,&m, pivot_mean); 
+        if (ip<m-1){
+            QuickSort_min(array,ip,m-1); 
+        }
+        if(m+1<iu){
+            QuickSort_min(array,m+1, iu );
+        }
+        
+    }
+    
+    return count; 
+    
     
     
 }
-
+int QuickSort_median(int*array, int ip, int iu){
+    int m; 
+    int count; 
+    
+    if( !array){
+        return ERR; 
+    }
+    if ( iu < ip ){
+        return ERR; 
+    }
+    if ( iu == ip){
+        return OK; 
+    }
+    else{
+        count=partition(array, ip, iu,&m, pivot_median); 
+        if (ip<m-1){
+            QuickSort_min(array,ip,m-1); 
+        }
+        if(m+1<iu){
+            QuickSort_min(array,m+1, iu );
+        }
+        
+    }
+    
+    return count; 
+    
+    
+}
 int QuickSort_min(int* array, int ip, int iu){
     int m; 
     int count; 
@@ -253,6 +296,12 @@ int pivot_mean(int*array, int ip, int iu, int * pos){
     return 0; 
 }
 int pivot_median(int*array, int ip, int iu, int * pos){
+    int count=0; 
+    int median=ip + (iu-ip)/2; 
+    int vals[3]; 
 
+    if(array[ip]<array[median]){
+
+    }
  
 }
