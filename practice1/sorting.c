@@ -298,10 +298,11 @@ int pivot_mean(int*array, int ip, int iu, int * pos){
 int pivot_median(int*array, int ip, int iu, int * pos){
     int count=0; 
     int median=ip + (iu-ip)/2; 
-    int vals[3]; 
+    int vals[3]={ip,median,iu}; 
+
 
     if(array[ip]<array[median]){
-
+        
     }
  
 }
