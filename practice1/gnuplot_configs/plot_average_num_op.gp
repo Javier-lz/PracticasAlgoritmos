@@ -19,9 +19,6 @@ max_bubble = STATS_max
 max_ops = (max_insert > max_bubble) ? max_insert : max_bubble
 set yrange [0:max_ops * 1.05]
 
-plot input_file using 1:4 with linespoints title "InsertSort - Media", \
-     input_file using 1:5 with linespoints title "InsertSort - Mínimo", \
-     input_file using 1:6 with linespoints title "InsertSort - Máximo", \
-     comparison_file using 1:4 with linespoints title "BubbleSort - Media", \
-     comparison_file using 1:5 with linespoints title "BubbleSort - Mínimo", \
-     comparison_file using 1:6 with linespoints title "BubbleSort - Máximo"
+plot input_file using 1:3 with linespoints title "QuickSort median - Media",  \
+     comparison_file 1:3 with linespoints title "Merge Sort -Media",\
+

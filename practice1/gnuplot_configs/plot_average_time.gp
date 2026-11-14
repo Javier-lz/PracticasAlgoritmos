@@ -1,4 +1,3 @@
-
 set terminal pngcairo enhanced
 set output output_file
 
@@ -19,8 +18,7 @@ max_comparison = STATS_max
 max_time = (max_input > max_comparison) ? max_input : max_comparison
 set yrange [0:max_time * 1.05]
 
-plot input_file using 1:3 \
-    with linespoints \
-    title sprintf("AvTime(%s)", algorithm)
+plot input_file using 1:3 with linespoints title sprintf("AvTime(%s)", algorithm), \
+     comparison_file using 1:3 with linespoints title sprintf("AvTime(%s)", comparison_algorithm)
 
 set output

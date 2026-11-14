@@ -182,10 +182,10 @@ int QuickSort_mean( int* array, int ip, int iu){
     else{
         count=partition(array, ip, iu,&m, pivot_mean); 
         if (ip<m-1){
-            QuickSort_min(array,ip,m-1); 
+           count+= QuickSort_min(array,ip,m-1); 
         }
         if(m+1<iu){
-            QuickSort_min(array,m+1, iu );
+            count+=QuickSort_min(array,m+1, iu );
         }
         
     }
@@ -211,10 +211,10 @@ int QuickSort_median(int*array, int ip, int iu){
     else{
         count=partition(array, ip, iu,&m, pivot_median); 
         if (ip<m-1){
-            QuickSort_min(array,ip,m-1); 
+            count+=QuickSort_min(array,ip,m-1); 
         }
         if(m+1<iu){
-            QuickSort_min(array,m+1, iu );
+            count+=QuickSort_min(array,m+1, iu );
         }
         
     }
@@ -239,10 +239,10 @@ int QuickSort_min(int* array, int ip, int iu){
     else{
         count=partition(array, ip, iu,&m, pivot_min); 
         if (ip<m-1){
-            QuickSort_min(array,ip,m-1); 
+            count+=QuickSort_min(array,ip,m-1); 
         }
         if(m+1<iu){
-            QuickSort_min(array,m+1, iu );
+            count+=QuickSort_min(array,m+1, iu );
         }
         
     }
@@ -296,13 +296,39 @@ int pivot_mean(int*array, int ip, int iu, int * pos){
     return 0; 
 }
 int pivot_median(int*array, int ip, int iu, int * pos){
-    int count=0; 
-    int median=ip + (iu-ip)/2; 
-    int vals[3]={ip,median,iu}; 
-
-
-    if(array[ip]<array[median]){
-        
-    }
  
+    int median=ip + (iu-ip)/2; 
+
+    if( array[ip]>array[iu]){
+        if(array[median]>array[ip]){
+            *pos=ip;
+            return 2; 
+        }
+        else{
+            if(array[median]>array[iu]){
+                *pos= median; 
+                return 3; 
+            }
+            else{
+                *pos=iu; 
+                return 3; 
+            }
+        }
+    }
+    else{
+          if(array[median]>array[iu]){
+            *pos=iu;
+            return 2; 
+        }
+        else{
+            if(array[median]>array[ip]){
+                *pos= median; 
+                return 3; 
+            }
+            else{
+                *pos=ip; 
+                return 3; 
+            }
+        } 
+    }
 }
