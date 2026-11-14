@@ -182,10 +182,10 @@ int QuickSort_mean( int* array, int ip, int iu){
     else{
         count=partition(array, ip, iu,&m, pivot_mean); 
         if (ip<m-1){
-           count+= QuickSort_min(array,ip,m-1); 
+           count+= QuickSort_mean(array,ip,m-1); 
         }
         if(m+1<iu){
-            count+=QuickSort_min(array,m+1, iu );
+            count+=QuickSort_mean(array,m+1, iu );
         }
         
     }
@@ -211,10 +211,10 @@ int QuickSort_median(int*array, int ip, int iu){
     else{
         count=partition(array, ip, iu,&m, pivot_median); 
         if (ip<m-1){
-            count+=QuickSort_min(array,ip,m-1); 
+            count+=QuickSort_median(array,ip,m-1); 
         }
         if(m+1<iu){
-            count+=QuickSort_min(array,m+1, iu );
+            count+=QuickSort_median(array,m+1, iu );
         }
         
     }
