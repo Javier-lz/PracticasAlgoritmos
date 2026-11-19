@@ -28,7 +28,7 @@ void free_dictionary(PDICT pdict){
 }
 
 int insert_dictionary(PDICT pdict, int key){
-    int A=0, j;
+    int A=0, j, count=0;
 
     if (!pdict || key<0)
     {
@@ -50,17 +50,18 @@ int insert_dictionary(PDICT pdict, int key){
         {
             pdict->table[j+1]=pdict->table[j];
             j--;
+            count;
         }
         pdict->table[j+1]=A;
     }
     
     pdict->n_data++;
 
-    return OK;
+    return count;
 }
 
 int massive_insertion_dictionary(PDICT pdict, int *keys, int n_keys){
-    int i;
+    int i, count=0, temp=0;
 
     if (!pdict || !keys || n_keys<0)
     {
@@ -69,11 +70,13 @@ int massive_insertion_dictionary(PDICT pdict, int *keys, int n_keys){
 
     for ( i = 0; i < n_keys; i++)
     {
-        if(insert_dictionary(pdict, keys[i])==ERR)
+        temp=insert_dictionary(pdict, keys[i]);
+        if(temp==ERR)
             return ERR;
+        count=+temp;
     }
     
-    return OK;
+    return count;
 }
 
 
@@ -88,5 +91,4 @@ int lin_search(int* table, int F, int L , int key, int*ppos){
         }
     }
     return NOT_FOUND; 
-    
 }
