@@ -81,6 +81,9 @@ int massive_insertion_dictionary(PDICT pdict, int *keys, int n_keys){
 
 
 int lin_search(int* table, int F, int L , int key, int*ppos){
+    if(table==NULL || F<0 || L<0 || L<F){
+        return ERR; 
+    }
     int i = F; 
     int count=0; 
     for (i=F;i<=L;i++){
@@ -90,5 +93,6 @@ int lin_search(int* table, int F, int L , int key, int*ppos){
             return count;
         }
     }
-    return NOT_FOUND; 
+    *ppos=NOT_FOUND;
+    return count; 
 }
