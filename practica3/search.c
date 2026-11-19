@@ -58,3 +58,20 @@ int insert_dictionary(PDICT pdict, int key){
 
     return OK;
 }
+
+int massive_insertion_dictionary(PDICT pdict, int *keys, int n_keys){
+    int i;
+
+    if (!pdict || !keys || n_keys<0)
+    {
+        return ERR;
+    }
+
+    for ( i = 0; i < n_keys; i++)
+    {
+        if(insert_dictionary(pdict, keys[i])==ERR)
+            return ERR;
+    }
+    
+    return OK;
+}
