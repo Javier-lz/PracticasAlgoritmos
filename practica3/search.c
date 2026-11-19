@@ -26,3 +26,35 @@ void free_dictionary(PDICT pdict){
         free(pdict);
     }
 }
+
+int insert_dictionary(PDICT pdict, int key){
+    int A=0, j;
+
+    if (!pdict || key<0)
+    {
+        return ERR;
+    }
+    
+    if (pdict->size == pdict->n_data)
+    {
+        return ERR;
+    }
+    
+    pdict->table[pdict->n_data]=key;
+
+    if (pdict->order == SORTED)
+    {
+        A=pdict->table[pdict->n_data];
+        j= pdict->n_data -1;
+        while (j>=0 && pdict->table[j]>A)
+        {
+            pdict->table[j+1]=pdict->table[j];
+            j--;
+        }
+        pdict->table[j+1]=A;
+    }
+    
+    pdict->n_data++;
+
+    return OK;
+}
