@@ -111,3 +111,28 @@ int lin_search(int* table, int F, int L , int key, int*ppos){
     *ppos=NOT_FOUND;
     return count; 
 }
+
+int lin_auto_search(int *table, int F, int L, int key, int *ppos){
+    int el_anterior;
+
+    if(table==NULL || F<0 || L<0 || L<F || !ppos){
+        return ERR; 
+    }
+    int i = F; 
+    int count=0; 
+    for (i=F;i<=L;i++){
+        count++; 
+        if(table[i]==key){
+            *ppos=i; 
+            if (i>0)
+            {
+                el_anterior= table[i-1];
+                table[i-1]=key;
+                table[i]=el_anterior;
+            }
+            return count;
+        }
+    }
+    *ppos=NOT_FOUND;
+    return count; 
+}
