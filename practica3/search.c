@@ -136,3 +136,31 @@ int lin_auto_search(int *table, int F, int L, int key, int *ppos){
     *ppos=NOT_FOUND;
     return count; 
 }
+
+
+int bin_search(int* table, int F, int L , int key, int*ppos){
+    if(table==NULL || F<0 || L<0 || L<F || !ppos){
+        return ERR; 
+    }
+    int count=0; 
+    int l=F; 
+    int r = L; 
+    int m;  
+    while (l<r){
+        m = l +(r-l)/2; 
+        count++;
+        if(table[m]==key){
+            *ppos=m; 
+            return count;
+        }
+        else if ( table[m]<key){
+            l=m; 
+
+        }
+        else{
+            r=m; 
+        }
+    }
+    *ppos=NOT_FOUND;
+    return count; 
+}
