@@ -10,6 +10,11 @@ PDICT init_dictionary(int size, char order){
     dic->size=size; 
     dic->order=order; 
     dic->n_data=0; 
+    dic->table=(int * ) malloc(size*sizeof(int)); 
+    if (!dic->table){
+        free(dic); 
+        return NULL; 
+    }
     return dic; 
 
 }
